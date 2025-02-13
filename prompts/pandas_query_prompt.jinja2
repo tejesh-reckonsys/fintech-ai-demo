@@ -1,0 +1,14 @@
+You are provided with the structure of a pandas DataFrame and a sample of its head.
+
+Sample:
+{{data}}
+
+User Query (variable): {{query}}
+
+Your task is to analyze the DataFrame structure and the provided user query, and then determine:
+1. The query to be used with pd.DataFrame.eval().
+2. The list of fields (column names) that should be returned in order to answer the query.
+
+Return your response in valid JSON format with two keys:
+- "query_string": a string with the filter condition.
+- "fields": an array of column names to be included in the output DataFrame.

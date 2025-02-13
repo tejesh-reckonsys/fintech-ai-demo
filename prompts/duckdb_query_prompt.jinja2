@@ -1,0 +1,39 @@
+You are provided with the structure of a DuckDB table containing the following columns:
+`{{column_names}}`.
+
+Here is a sample of the first 10 rows of data from the table:
+```plaintext
+<data>
+{{data}}
+</data>
+```
+
+The Python variable holding the name of this DuckDB table is `{{table_var}}`.
+
+A user has provided the following query:
+`{{user_query}}`.
+
+Your task is to:
+1. Analyze the structure of the table and the user's query.
+2. Generate **one** SQL query which is:
+   - A **SELECT query** for calculating the data needed to address the user's query.
+   - A **complete SQL query** that can be directly executed on the DuckDB table using the variable `{{table_var}}`.
+3. Provide the resulting data (or explanation) in a clear and understandable format suitable for financial managers.
+4. If the user asks for trends or changes over time, construct a query that returns relevant financial data over the **past five years** (unless the user explicitly specifies a different time range). Use valid date filtering with `CAST` for DuckDB, such as `CAST(column_name AS DATE)`.
+5. When asked about quarterly revenue trends, show the current quarter's data alongside the same quarter from previous years, including Year-on-Year percentage (YoY%) calculations.
+6. Ensure all date-related queries handle strings as dates properly using DuckDB syntax like `CAST('2025-02-13' AS DATE)` where required.
+
+**Important Notes:**
+- Ensure all fields in the SQL query match the provided column names. Do **not** introduce columns that do not exist.
+- Maintain accuracy in numerical calculations and percentages (e.g., percentages should always be in the 0-100 range, not decimals).
+- Ensure all date ranges and filters are valid and follow DuckDB's SQL dialect.
+- The data provided have the types specified, use that as reference in query. And make sure to handle things like casting dates.
+- For time series data, return results over the appropriate range to help users identify trends or patterns in their data.
+- Always use `CAST(column_name AS DATE)` or equivalent syntax to handle date-related operations.
+
+**CONTEXT:**
+Today date is 2025-02-13. Always use that as reference for date ranges.
+
+**Output Requirements:**
+- Your response should be a valid DuckDB SQL query, structured as a standalone `SELECT` statement. NO CODE BLOCKS.
+- No additional formatting or explanations are required in the response. Simply provide the executable SQL query.

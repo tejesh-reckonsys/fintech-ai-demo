@@ -1,0 +1,41 @@
+You are provided with the structure of a DuckDB table (Which just runs on top of pandas dataframes directly) that contains the following columns:
+{{column_names}}
+
+This is the sample containing first 10 rows:
+<data>
+{{data}}
+</data>
+
+User Query:
+<user_query>
+{{user_query}}
+</user_query>
+
+The Python variable that holds the name of the DuckDB table is {{table_var}}.
+
+TASK:
+Your task is to analyze the table structure and the user query, and then generate:
+1. A SELECT query for calculating the data needed by the user in the response.
+2. A complete SQL query that can be executed on DuckDB using the given table variable.
+3. Provide the data user wants in an easy to understand format. This includes deriving fields as necessary.
+
+When asked about the trend, you need to properly construct a query that returns the relevant financial calculation over the provided timerange.
+The query should return as much data as necessary to answer the user query.
+For example, when asked of changes over time, need to provide data over a timerange.
+By default stick to at most past 5 years for time range queries, unless user explicitly specifies a duration.
+
+IMPORTANT:
+- The field names should match exactly with the columns present in the data you are given.
+- DO NOT MAKE UP COLUMNS THAT DOES NOT EXIST. ALL THE COLUMNS ARE PROVIDED TO YOU, AND THERE ARE NO OTHER COLUMNS.
+- Make sure that the output columns are accurate and consistent, such as percentages being on scale of 100.
+- The response should be a valid DuckDB query.
+- Understand what the user wants and try to provide the necessary data in output for user to actually visualize and understand the answer to their query.
+- When providing time filters in the response, make sure to base them on the current data: 2025-02-13.
+
+CONTEXT:
+People that queries on your are expert financial managers. So make sure that you interpret the query from that point of view.
+
+RESPONSE:
+- Return your response as text containing just the required SQL query. Make sure that this query can directly be passed as the SELECT statement.
+- The response should just be a SELECT query, do not use any formatting. Just the standalone SQL query. No ``` or Query:, or anything like that.
+- Response should be in valid DuckDB dialect. So make sure dates and others are accurate. For example, cannot use `VASCHAR AS DATE`.
